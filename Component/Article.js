@@ -1,6 +1,6 @@
 import React , {Component} from 'react';
 
-import { Image , StyleSheet} from 'react-native';
+import { Image , StyleSheet , TouchableHighlight} from 'react-native';
 
 import { Card, CardItem, Thumbnail, Text, Button, Icon, Left, Body , Drawer, Container, Right } from 'native-base';
 
@@ -49,7 +49,8 @@ export default class Article extends Component{
     {
         const {Products} =this.props;
          return( 
-            
+
+                <TouchableHighlight>
                     <Card style={{flex: 0}}>
                         <CardItem>
                             <Left> 
@@ -79,7 +80,9 @@ export default class Article extends Component{
                                 </Button>
                             </Left>
                         </CardItem>
-                </Card> 
+                    </Card> 
+                </TouchableHighlight>
+            
          );
      }
     }
