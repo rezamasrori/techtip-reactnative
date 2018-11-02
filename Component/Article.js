@@ -4,10 +4,16 @@ import { Image, StyleSheet, TouchableHighlight, Alert , View } from 'react-nativ
 
 import { Card, CardItem, Left, Body, Text, Thumbnail, Icon, Button } from 'native-base';
 
+import Loding from'./Loding';
+
 import HTML from 'react-native-render-html';
 // import {parse}from 'fast-html-parser';
 
-export default class Article extends Component {
+import { createStackNavigator } from 'react-navigation';
+
+import Test from'./Test';
+
+class Article extends Component {
     constructor(props) {
         super(props);
 
@@ -15,11 +21,9 @@ export default class Article extends Component {
             Products: [],
             imgURL: '',
             page: 1,
-            // LinkURL:[],
+
         }
-        // var root =parse( Products.item.content.rendered);
-        // console.log('here ')
-        // console.log(root)
+ 
 
     }
     /*برای فراخوانی از 
@@ -33,7 +37,6 @@ export default class Article extends Component {
             .then(Response => Response.json())
             .then(json => {
 
-                console.log(json.guid.rendered)
                 this.setState({
                     imgURL: json.guid.rendered
                 });
@@ -42,10 +45,14 @@ export default class Article extends Component {
 
 
     render() {
+
         const { Products } = this.props;
+
+        const { navigate } = this.props.navigation;
+
         return (
             <View>
-                <TouchableHighlight onPress={() => { Alert.alert('O||O') }}>
+                <TouchableHighlight onPress={() =>  navigate('Test  ')}>
                 <View>
                 <Card style={{ flex: 0 }}>
                 <View>
@@ -68,10 +75,11 @@ export default class Article extends Component {
                             />
                             <CardItem>
                                 <View>
-                                    <Text>
-                                        <HTML value={Products.item.content.rendered} />
-                                    </Text>
-                                </View>
+
+                                <Text numberOfLines={3}>{Products.item.content.rendered}</Text>     
+                                        {/* <HTML value={Products.item.content.rendered} /> */}
+                               </View>
+                               
                             </CardItem>
 
 
@@ -102,5 +110,14 @@ export default class Article extends Component {
     }
 }
 
+export default createStackNavigator({ 
 
+    Home :{
+        screen : Article
 
+    },
+    Test : {
+        screen : Test
+    }
+
+})
